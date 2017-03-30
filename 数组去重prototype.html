@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+<style>
+
+</style>
+</head>
+<body>
+
+
+<script>
+Array.prototype.unique=function(){
+	var tmp=[];
+	for (var i = 0; i < this.length; i++) {
+		if(!findInArr(tmp,this[i])){
+			tmp.push(this[i]);
+		}
+	};
+	return tmp;
+
+	function findInArr(arr,n){
+		for (var i = 0; i < arr.length; i++) {
+			if(arr[i]==n){
+				return true;
+			} 
+		};//for
+		return false;
+	};//findInArr
+};//fn 
+
+
+
+Array.prototype.xxx=function(){
+	
+	for (var i = 0; i < this.length; i++) {
+		for(var j=i+1; j<this.length; j++){
+			if(this[i]==this[j]){
+				this.splice(j--,1);
+			}
+		}
+	}
+	return this;
+};//xxx
+
+
+
+var arr=[12,4,6,12,7,6,12,3,3,3,7];
+document.write(arr.xxx());
+
+
+
+
+</script>
+</body>
+</html>
