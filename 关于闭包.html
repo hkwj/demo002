@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+*{margin:0; padding:0; list-style:none;}
+
+</style>
+
+</head>
+
+<body>
+
+
+
+<script>
+
+var add = (function(){
+	var a=0;
+	return function(){
+		a++;
+		console.log(a);	
+	}	
+})();
+
+var fly=add;
+
+add();
+add();
+add=null;
+fly();
+
+
+//对null的解释
+var show=function(){
+	alert(1);
+}
+
+var show2=show;
+//show();
+show=null;
+show2();
+
+
+</script>
+</body>
+</html>
