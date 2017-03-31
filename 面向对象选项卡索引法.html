@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+*{margin:0; padding:0; list-style:none;}
+#div1 input.active{background:red;}
+#div1 div{height:50px;background:red; display:none;}
+</style>
+
+</head>
+
+<body>
+<div id="div1">
+	<input type="button" value="aaa" class="active">
+	<input type="button" value="bbb">
+	<input type="button" value="ccc">
+    <div style="display:block;">aaaa</div>
+    <div>bbbb</div>
+    <div>cccc</div>
+</div>
+
+
+
+
+
+
+<script>
+function Tab(id){
+	this.wrap=document.getElementById(id);
+	this.head=this.wrap.getElementsByTagName('input');
+	this.body=this.wrap.getElementsByTagName('div');
+
+	var _this=this;
+	for (var i = 0; i < this.head.length; i++) {
+		this.head[i].index=i;
+		this.head[i].onclick=function(){
+			_this.fnClick(this.index);
+		}
+	}
+}
+
+Tab.prototype.fnClick=function(index){
+	for (var i = 0; i < this.head.length; i++) {
+		this.head[i].className='';
+		this.body[i].style.display='none';
+	}
+	this.head[index].className='active';
+	this.body[index].style.display='block';
+}
+
+new Tab('div1');
+</script>
+</body>
+</html>
