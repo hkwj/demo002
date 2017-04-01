@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+*{margin:0; padding:0; list-style:none;}
+.box{
+	background:#ccc;
+}
+</style>
+
+</head>
+
+<body>
+<div class="box">box</div>
+<div class="bbox">bbox</div>
+<div class="b    box a">b box a</div>
+<div class="a_box_b">a_box_b</div>
+
+
+<script>
+
+//background 变色
+var aDiv=document.getElementsByTagName('div');
+// for (var i = 0; i < aDiv.length; i++) {
+// 	toogleClass(aDiv[i],'box');
+// };
+
+
+for (var i = 0; i < aDiv.length; i++) {
+	if(hasClass(aDiv[i],'box')){
+		aDiv[i].style.background="pink";
+	}
+}
+
+//切换class
+function toogleClass(obj,sClass){
+	if(hasClass(obj,sClass)){
+		removeClass(obj,sClass);
+	} else {
+		addClass(obj,sClass);
+	}
+}; // toogleClass
+
+function hasClass(obj,sClass){
+	var re=new RegExp('\\b'+sClass+'\\b');
+	return re.test(obj.className);
+};//hasClass
+
+
+function removeClass(obj,sClass){
+	var re=new RegExp('\\b'+sClass+'\\b');
+	if(re.test(obj.className)){
+		obj.className=obj.className.replace(re,'');// 去掉传入的class
+		if(!obj.className){
+			obj.removeAttribute('class');
+		};
+		if(obj.className){
+			obj.className=obj.className.replace(/^s+|s+$/g,'').replace(/\s+/g,' ');
+		};//class 之间保留一个空格
+	}
+};//remove class
+
+
+function addClass(obj,sClass){
+	var re=new RegExp('\\b'+sClass+'\\b');
+	if(!re.test(obj.className)){
+		obj.className=obj.className+' '+sClass;
+	};
+	obj.className=obj.className.replace(/^s+|s+$/g,'').replace(/\s+/g,' ');
+};// addClass
+
+
+</script>
+</body>
+</html>
