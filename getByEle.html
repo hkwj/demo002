@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+*{margin:0; padding:0; list-style:none;}
+body{
+	font-size:30px; color:red;
+}
+</style>
+
+</head>
+
+<body>
+
+
+
+<script>
+function getEle(str,aParent){
+	var arr=str.match(/\S+/g);
+	var aParent=aParent || [document];
+	var aChild=[];
+	for (var i = 0; i < arr.length; i++) {
+		aChild=getByStr(aParent,arr[i]);
+		aParent=aChild;
+	}
+	return aChild;
+};//getEle
+
+function getByStr(aParnet,str){
+	var aChild=[];
+	for(var j=0; j<aParnet.length; j++){
+		switch(str.charAt(0)){
+			case '#':
+				var obj=document.getElementById(str.substring(1));
+				obj && aChild.push(obj);
+				break;
+			case '.':
+				var aEle=getByClass(aParnet[j],str.substring(1));
+				for (var i = 0; i < aEle.length; i++) {
+					aChild.push(aEle[i]);
+				};//for .
+				break;
+			default:
+				if(/\w+#\w+/.test(str)){//div#div1
+					var arr=str.split('#');
+					var aEle=aParnet[j].getElementsByTagName(arr[0]);
+					for(var i=0; i<aEle.length; i++){
+						aChild.push(aEle[i]);
+					}
+				} else if(/\w+\.\w+/.test(str)){
+					var arr=str.split('.');
+					var aEle=aParent[j].getElementsByTagName(arr[0]);
+					var re=new RegExp('\\b'+arr[1]+'\\b');
+					for(var i=0; i<aEle.length; i++){
+						if(re.test(aEle[i].className)){
+							aChild.push(aEle[i]);
+						}
+					}
+				} else if(/\w+\[\w+=\w+\]/.test(str)){
+					var arr=str.split(/\[|=|\]/g);
+					var aEle=aParent[j].getElementsByTagName(arr[0]);
+					for(var i=0; i<aEle.length; i++){
+						if(aEle[i].getAttribute(arr[1])==arr[2]){
+							aChild.push(aEle[i]);
+						}
+					}
+				} else if(/\w+\:\w+(\(.\))?/.test(str)){
+					var arr=str.split(/\:|\(|\)/g);
+					var aEle=aParent[j].getElementsByTagName(arr[0]);
+					if(aEle.length==0) return [];
+					switch(arr[1]){
+						case 'first':
+							aChild.push(aEle[0]);
+							break;
+						case 'last':
+							aChild.push(aEle[aEle.length-1]);
+							break;
+						case 'odd':
+							for(var i=0; i<aEle.length; i++){
+								if(i%2==1){
+									aChild.push(aEle[i]);
+								}
+							};
+							break;
+						case 'even':
+							for (var i = 0; i < aEle.length; i++) {
+								aChild.push(aEle[i]);
+							};
+							break;
+						case 'eq':
+							aEle[arr[2]] && aChild.push(aEle[arr[2]]);
+							break;
+						case 'lt':
+							for (var i = 0; i < arr[2]; i++) {
+								aChild.push(aEle[i]);
+							};
+							break;
+						case 'gt':
+							if(parseInt(arr[2])<0) return [];
+							for(var i=parseInt(arr[2])+1; i<aEle.length; i++){
+								aChild.push(aEle[i]);
+							};
+							break;
+					}
+				} else {
+					var aEle=aParent[j].getElementsByTagName(str);
+					for(var i=0; i<aEle.length; i++){
+						aChild.push(aEle[i]);
+					}
+				}
+		};//switch
+	};//for
+	return aChild;
+};//getByStr
+
+
+function getByClass(oParnet,sClass){
+	if(oParent.getElementsByClassName){
+		return oParent.getElementsByClassName(sClass);
+	}
+	var aEle=oParent.getElementsByTagName('*');
+	var result=[];
+	var re=new RegExp('\\b'+sClass+'\\b');
+	for (var i = 0; i < aEle.length; i++) {
+		if(re.test(aEle[i].className)){
+			result.push(aEle[i]);
+		}
+	}
+	return result;
+};// getByClass
+
+
+</script>
+</body>
+</html>
