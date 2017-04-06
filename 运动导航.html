@@ -38,7 +38,7 @@ var aLi=oUl.children;
 var timer=null;
 var l=0; 
 var nowPos=0;
-for (var i = 0; i < aLi.length; i++) {
+for (var i = 0; i < aLi.length-1; i++) {
 	aLi[i].onmouseover=function(){
 		move(oBar,this.offsetLeft);
 	}; //onmouseover
