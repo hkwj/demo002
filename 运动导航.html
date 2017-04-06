@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+*{margin:0; padding:0; list-style:none;}
+#ul1{
+	width:1000px; height:50px; margin:0 auto;
+	position:relative;
+}
+#ul1 li{
+	width:198px; height:50px; line-height:50px;
+	text-align:center; float:left; border:1px solid #ccc;
+}
+#ul1 .bar{
+	position:absolute; left:0; top:0; 
+	background:#099; z-index:-1;
+}
+</style>
+
+</head>
+
+<body>
+<ul id="ul1">
+	<li>xxx</li>
+	<li>xxx</li>
+	<li>xxx</li>
+	<li>xxx</li>
+	<li>xxx</li>
+	<li class="bar"></li>
+</ul>
+
+
+<script>
+var oUl=document.getElementById('ul1');
+var oBar=document.getElementsByClassName('bar')[0];
+var aLi=oUl.children;
+var timer=null;
+var l=0; 
+var nowPos=0;
+for (var i = 0; i < aLi.length; i++) {
+	aLi[i].onmouseover=function(){
+		move(oBar,this.offsetLeft);
+	}; //onmouseover
+	aLi[i].onmouseout=function(){
+		move(oBar,nowPos);
+	};//onmouseout
+	aLi[i].onclick=function(){
+		clearInterval(timer);
+		oBar.style.left=this.offsetLeft+'px';
+		nowPos=this.offsetLeft;
+		l=nowPos;
+	}
+};//for 加事件
+
+function move(obj,iTarget){
+	clearInterval(timer);
+	var speed=0;
+	timer=setInterval(function(){
+		speed+=(iTarget-obj.offsetLeft)/5;
+		speed*=0.7;
+		l+=speed;
+		obj.style.left=Math.round(l)+'px';
+
+		if(Math.abs(speed)<1) speed=0;
+		if(obj.offstLeft==iTarget && speed==0){
+			clearInterval(timer);
+		}
+	},30)
+}
+
+</script>
+</body>
+</html>
