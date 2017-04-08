@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+*{margin:0; padding:0; list-style:none;}
+#div1{
+	width:100px; height:100px; 
+	background:#ccc; 
+	position:absolute; left:0; top:0;
+}
+
+</style>
+
+</head>
+
+<body>
+<div id="div1"></div>
+
+
+<script>
+
+var oDiv=document.getElementById('div1');
+var timer=null;
+var speedX=6;
+var speedY=8;
+timer=setInterval(function(){
+	var l=oDiv.offsetLeft+speedX;
+	var t=oDiv.offsetTop+speedY;
+
+	if(t>document.documentElement.clientHeight-oDiv.offsetHeight){
+		t=document.documentElement.clientHeight-oDiv.offsetHeight;
+		speedY*=-1;
+	} else if(t<0){
+		t=0;
+		speedY*=-1;
+	};
+
+	if(l>document.documentElement.clientWidth-oDiv.offsetWidth){
+		l=document.documentElement.clientWidth-oDiv.offsetWidth;
+		speedX*=-1;
+	} else if(l<0){
+		l=0;
+		speedX*=-1;
+	};
+
+	oDiv.style.left=l+'px';
+	oDiv.style.top=t+'px';
+},30);
+
+</script>
+</body>
+</html>
