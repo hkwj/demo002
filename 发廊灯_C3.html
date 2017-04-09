@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+*{margin:0; padding:0; list-style:none;}
+@keyframes test{
+	from{left:0px;}
+	to{left:-113px;}
+}
+.box{
+	width:113px; height:300px; border:1px solid #000;
+	margin:100px auto; border-radius:10px; overflow:hidden;
+	position:relative;
+}
+.box div{
+	width:500px; height:300px; 
+	background:-webkit-repeating-linear-gradient(-45deg,red 0px,red 20px,#fff 20px,#fff 40px,blue 40px,blue 60px,#fff 60px,#fff 80px);
+	position:absolute; top:0; left:0; animation:test 1s linear infinite;
+}
+
+</style>
+
+</head>
+
+<body>
+<div class="box">
+	<div></div>
+</div>
+
+
+
+
+<script>
+
+
+</script>
+</body>
+</html>
