@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+*{margin:0; padding:0; list-style:none;}
+@keyframes test{
+	from{width:200px;}
+	to{width:500px;}
+}
+div{
+	width:200px; height:200px; background:#ccc;
+	animation-name:test;
+	animation-duration:1s;
+	animation-timing-function:ease;
+	animation-iteration-count:infinite;
+	animation-direction:alternate;
+	animation-delay:1s;
+}
+
+div:active{
+	animation-play-state:paused;
+}
+
+
+</style>
+
+</head>
+
+<body>
+<div></div>
+
+
+
+
+<script>
+
+
+</script>
+</body>
+</html>
