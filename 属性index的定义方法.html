@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset= "UTF-8">
+<style>
+*{margin:0; padding:0; list-style:none;}
+
+</style>
+
+</head>
+<body>
+
+<input type="button" value="btn1" />
+<input type="button" value="btn2" />
+<input type="button" value="btn3" />
+
+
+<script>
+
+var aBtn=document.getElementsByTagName('input');
+
+var arr=['value111', 'value222', 'value333'];
+for(var i=0; i<aBtn.length; i++){
+	aBtn[i].index=i;
+	aBtn[i].onclick=function(){
+		this.value=arr[this.index];
+	}
+}
+
+
+</script>
+</body>
+</html> 
